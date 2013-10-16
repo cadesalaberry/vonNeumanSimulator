@@ -8,7 +8,8 @@ Test suit designed around the Computer Simulator from Davide Brugali and Marco T
 
 ![alt text][pathtree]
 
-# Conformance test suite
+
+# Conformance Test Suite
 
 - Identifier
 - Description of test setup (e.g., objects needed by the test case)
@@ -42,7 +43,6 @@ FCLOSE 	|			| Closes the previously opened file
 
 # Components
 
-
 - CPU: executes elementary operations. The CPU uses registers to store operands, results, data and instructions:
 	- registers A and B are general­purpose registers
 	- PC is the program counter
@@ -56,17 +56,13 @@ The CPU executes according to a fetch­decode­execute cycle.
 - I/0 devices – the keyboard, display and hard disk behave like the RAM. They read or write data on the bus when corresponding commands are found on the bus.
 
 
-
-# Instruction execution
+# Instruction Execution
 
 The CPU behavior can be modeled as the state machine below (reactions are embedded to states for readability).
 
 ![alt text][diagram]
 
 Each CPU cycle involves fetching the next instruction from memory according to the program counter (PC), when the RAM reads the memory and issues and acknowledge command, the CPU enters a state where the instruction is decoded. The CPU copies the instruction into the IR, examines and executes it.
-
-
-
 
 [pathtree]: pathtree.png "State Machine Diagram"
 [diagram]: statemachine.png "State Machine Diagram"
