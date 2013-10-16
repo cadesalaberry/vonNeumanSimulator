@@ -1,0 +1,18 @@
+17
+OUTPUT 114
+INPUT 111
+LOADA 111
+OUTPUT 115
+INPUT 112
+LOADB 112
+ADD
+STOREA 113
+OUTPUT 116
+OUTPUT 113
+HALT
+0
+0
+0
+Insert first number
+Insert second number
+Result
