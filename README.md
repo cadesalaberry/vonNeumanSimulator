@@ -64,5 +64,5 @@ The CPU behavior can be modeled as the state machine below (reactions are embedd
 
 Each CPU cycle involves fetching the next instruction from memory according to the program counter (PC), when the RAM reads the memory and issues and acknowledge command, the CPU enters a state where the instruction is decoded. The CPU copies the instruction into the IR, examines and executes it.
 
-[pathtree]: pathtree.png "State Machine Diagram"
-[diagram]: statemachine.png "State Machine Diagram"
+[pathtree]: assets/pathtree.png "State Machine Diagram"
+[diagram]: assets/statemachine.png "State Machine Diagram"
