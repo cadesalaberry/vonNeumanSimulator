@@ -5,44 +5,41 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import simulator.Bus;
 import simulator.Computer;
 
 public class TestStates1to5 {
 
-	@Before
-	public void setUp() throws Exception {
-
-	}
-
 	@Test
 	public void testJUMPRoutine() {
 
-		String testStr[] = { "JUMP 2", "FAILED", "PASSED"};
-		String xpctBUS[] ={ "2", "ACK", "PASSED" };
-		
+		String testStr[] = { "JUMP 2", "FAILED", "PASSED" };
+		String xpctBUS[] = { "2", "ACK", "PASSED" };
+
 		Computer computer = new Computer(testStr);
 
-		computer.simulate(10);
-				
+		computer.simulate(3 * testStr.length);
+
 		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
 	}
-	
+
+	@Test
 	public void testJUMPZRoutine() {
 
-		String test[] = { "JUMPZ 1", "JUMPZ 5", "", "", "", "JUMP 1" };
-		String xpct[][] = { { "0", null, null }, // S0
-				{ "0", "ACK", "JUMP 1" }, // S1
-				{ "0", "ACK", "JUMP 1" }, // S16
-				{ "1", "ACK", "JUMP 5" }, // S0
-				{ "5", "ACK", "JUMP 1" }, // S1
-				{ "1", "ACK", "JUMP 5" }, // S16
-				{ "1", "ACK", "JUMP 5" }, // S0
-				{ "5", "ACK", "JUMP 1" }, // S1
-				{ "5", "ACK", "JUMP 1" }, // S16
-		};
+		String testStr[] = { "LOADA 4", "JUMPZ 3", "FAILED", "PASSED", "0" };
+		String xpctBUS[] = { "3", "ACK", "PASSED" };
 
-		assertTrue(Routine.areMatching(test, xpct));
+		Computer computer = new Computer(testStr);
+		computer.simulate(3 * testStr.length);
+
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+
+		String testStr2[] = { "LOADA 4", "JUMPZ 3", "PASSED", "FAILED", "1" };
+		String xpctBUS2[] = { "2", "ACK", "PASSED" };
+
+		Computer computer2 = new Computer(testStr2);
+		computer2.simulate(3 * testStr2.length);
+
+		assertTrue(Routine.busStateIsMatching(computer2.bus, xpctBUS2));
 	}
 
 }
