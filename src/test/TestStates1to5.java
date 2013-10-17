@@ -1,16 +1,13 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import simulator.Computer;
@@ -132,7 +129,7 @@ public class TestStates1to5 {
 
 		String testStr[] = { "OUTPUT 1", "PASSED" };
 		String xpctBUS[] = { "1", "ACK", "PASSED" };
-		String xpctRAM[] = { "OUTPUT 1", "PASSED" };
+
 		String xpctOut   = "\n> PASSED\n";
 
 		InputStream in_orig = System.in;
@@ -148,10 +145,7 @@ public class TestStates1to5 {
 		System.setIn(in_orig);
 		System.setOut(out_orig);
 
-		System.out.println(byteArrayOut);
 		assertEquals(byteArrayOut.toString(), xpctOut);
-
 		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
-		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
 	}
 }
