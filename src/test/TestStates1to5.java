@@ -18,7 +18,19 @@ public class TestStates1to5 {
 	@Test
 	public void testJUMPRoutine() {
 
-		String test[] = { "JUMP 1", "JUMP 5", "", "", "", "JUMP 1" };
+		String testStr[] = { "JUMP 2", "FAILED", "PASSED"};
+		String xpctBUS[] ={ "2", "ACK", "PASSED" };
+		
+		Computer computer = new Computer(testStr);
+
+		computer.simulate(10);
+				
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+	}
+	
+	public void testJUMPZRoutine() {
+
+		String test[] = { "JUMPZ 1", "JUMPZ 5", "", "", "", "JUMP 1" };
 		String xpct[][] = { { "0", null, null }, // S0
 				{ "0", "ACK", "JUMP 1" }, // S1
 				{ "0", "ACK", "JUMP 1" }, // S16
