@@ -22,6 +22,9 @@ public class TestStates1to5 {
 		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
 	}
 
+	/**
+	 * Assumes that LOADA is working.
+	 */
 	@Test
 	public void testJUMPZRoutine() {
 
@@ -42,4 +45,17 @@ public class TestStates1to5 {
 		assertTrue(Routine.busStateIsMatching(computer2.bus, xpctBUS2));
 	}
 
+	@Test
+	public void testSTOREARoutine() {
+
+		String testStr[] = { "LOADA 3", "STOREA 2", "FAILED", "PASSED" };
+		String xpctBUS[] = { "2", "ACK", "PASSED" };
+		String xpctRAM[] = { "LOADA 3", "STOREA 2", "PASSED", "PASSED" };
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(3 * testStr.length);
+
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
+	}
 }
