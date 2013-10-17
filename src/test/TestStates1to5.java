@@ -45,6 +45,9 @@ public class TestStates1to5 {
 		assertTrue(Routine.busStateIsMatching(computer2.bus, xpctBUS2));
 	}
 
+	/**
+	 * Assumes that LOADA is working.
+	 */
 	@Test
 	public void testSTOREARoutine() {
 
@@ -54,6 +57,23 @@ public class TestStates1to5 {
 
 		Computer computer = new Computer(testStr);
 		computer.simulate(3 * testStr.length);
+
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
+	}
+
+	/**
+	 * Assumes that LOADA is working.
+	 */
+	@Test
+	public void testMOVEABRoutine() {
+
+		String testStr[] = { "LOADA 3", "LOADB 4", "MOVEAB", "PASSED", "4" };
+		String xpctBUS[] = { "3", "ACK", "PASSED" };
+		String xpctRAM[] = { "LOADA 3", "LOADB 4", "MOVEAB", "PASSED", "PASSED" };
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(100);
 
 		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
 		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));

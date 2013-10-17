@@ -1,5 +1,9 @@
 package test;
 
+import java.util.Arrays;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import simulator.Bus;
 import simulator.Computer;
 import simulator.RAM;
@@ -56,9 +60,8 @@ public class Routine {
 				System.out
 						.println("Error: bus state is not matching expected value."
 								+ "\nHas Found: "
-								+ output[i]
-								+ "\nExpecting: "
-								+ xpected[i]);
+								+ Arrays.toString(output)
+								+ "\nExpecting: " + Arrays.toString(xpected));
 				return false;
 			}
 		}
@@ -89,7 +92,7 @@ public class Routine {
 		boolean passed = true;
 
 		System.out.print("{");
-		for (int i = 0; i < 100 && passed; i++) {
+		for (int i = 0; i < 3 * testStr.length && passed; i++) {
 			computer.simulate(i);
 			System.out.print("{ \"" + b.address);
 			System.out.print("\", \"" + b.command);
