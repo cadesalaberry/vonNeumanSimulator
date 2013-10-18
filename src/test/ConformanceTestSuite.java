@@ -165,7 +165,7 @@ public class ConformanceTestSuite {
 	@Test
 	public void testFOPENandFREADRoutine() {
 
-		String testStr[] = { "FOPEN 2", "FREAD 2", "TestFile" };
+		String testStr[] = { "FOPEN 2", "FREAD 2", "assets/TestFile" };
 		String xpctBUS[] = { "2", "ACK", "PASSED" };
 		String xpctRAM[] = { "FOPEN 2", "FREAD 2", "PASSED" };
 
@@ -185,9 +185,9 @@ public class ConformanceTestSuite {
 	@Test
 	public void testFCLOSERoutine() {
 
-		String testStr[] = { "FOPEN 3", "FCLOSE", "FREAD 3", "TestFile" };
+		String testStr[] = { "FOPEN 3", "FCLOSE", "FREAD 3", "assets/TestFile" };
 		String xpctBUS[] = { "2", "FREAD", "FREAD 3" };
-		String xpctRAM[] = { "FOPEN 3", "FCLOSE", "FREAD 3", "TestFile" };
+		String xpctRAM[] = { "FOPEN 3", "FCLOSE", "FREAD 3", "assets/TestFile" };
 
 		Computer computer = new Computer(testStr);
 		computer.simulate(10 * testStr.length);
