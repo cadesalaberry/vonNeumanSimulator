@@ -89,8 +89,8 @@ Each CPU cycle involves fetching the next instruction from memory according to t
 
 [pathtree]: assets/pathtree.png "State Machine Diagram"
 [diagram]: assets/statemachine.png "State Machine Diagram"
-[diagram]: assets/codecoverage.png "Non Optimal Code Coverage"
-[diagram]: assets/codecoverage2.png "Optimal Code Coverage"
+[codecoverage]: assets/codecoverage.png "Non Optimal Code Coverage"
+[codecoverage2]: assets/codecoverage2.png "Optimal Code Coverage"
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cadesalaberry/vonneumansimulator/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
