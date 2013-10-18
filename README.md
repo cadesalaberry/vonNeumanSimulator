@@ -16,7 +16,27 @@ Test suit designed around the Computer Simulator from Davide Brugali and Marco T
 - Test sequence covering start state, event/condition, expected action, and expected new
 state of the system.
 
-# State Rased Resting Report
+**TABLE TO ADD FROM PDF**
+
+# State Based Testing Report
+
+We used eclEmma to analyse the coverage of our testing code, leading to the following output statistics.
+
+![alt text][codecoverage]
+
+
+# Extended Conformance Suite
+
+Because the entire code was not covered with the previous test cases, we added the complementary ones to make it complete.
+
+**TABLE TO ADD FROM PDF**
+
+
+# Extended State Based Testing Report
+
+Again, using eclEmma, here is the coverage report.
+
+![alt text][codecoverage2]
 
 
 ===========
@@ -69,6 +89,8 @@ Each CPU cycle involves fetching the next instruction from memory according to t
 
 [pathtree]: assets/pathtree.png "State Machine Diagram"
 [diagram]: assets/statemachine.png "State Machine Diagram"
+[diagram]: assets/codecoverage.png "Non Optimal Code Coverage"
+[diagram]: assets/codecoverage2.png "Optimal Code Coverage"
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cadesalaberry/vonneumansimulator/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
