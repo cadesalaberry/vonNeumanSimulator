@@ -2,8 +2,6 @@ package test;
 
 import java.util.Arrays;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import simulator.Bus;
 import simulator.Computer;
 import simulator.RAM;

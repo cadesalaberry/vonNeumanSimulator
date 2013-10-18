@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -195,19 +194,9 @@ public class ConformanceTestSuite {
 		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
 
 	}
-/*
+
 	@Test
 	public void ultraCodeCoverer() {
-
-		String testStr[] = { "HALT"};
-
-		Computer computer = new Computer(testStr);
-		computer.simulate(10 * testStr.length);
-		computer.cpu.dump();
-	}*/
-
-	@Test
-	public void carlos4Lyfe() {
 
 		String testStr[] = { "LOADA 1", "INPUT", "OUTPUT", "HALT"};
 		
@@ -226,8 +215,6 @@ public class ConformanceTestSuite {
 		
 		computer.cpu.dump();
 	}
-
-	
 
 	/**
 	 * Assumes that STOREB is working.

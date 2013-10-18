@@ -16,6 +16,9 @@ Test suit designed around the Computer Simulator from Davide Brugali and Marco T
 - Test sequence covering start state, event/condition, expected action, and expected new
 state of the system.
 
+# State Rased Resting Report
+
+
 ===========
 
 
