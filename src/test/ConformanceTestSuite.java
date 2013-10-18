@@ -195,27 +195,6 @@ public class ConformanceTestSuite {
 
 	}
 
-	@Test
-	public void ultraCodeCoverer() {
-
-		String testStr[] = { "LOADA 1", "INPUT", "OUTPUT", "HALT"};
-		
-		InputStream in_orig = System.in;
-		PrintStream out_orig = System.out;
-		InputStream in = new ByteArrayInputStream("PASSED".getBytes());
-		ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
-		PrintStream out = new PrintStream(byteArrayOut);
-		System.setIn(in);
-		System.setOut(out);
-
-		Computer computer = new Computer(testStr);
-		computer.simulate(10 * testStr.length);
-		System.setIn(in_orig);
-		System.setOut(out_orig);
-		
-		computer.cpu.dump();
-	}
-
 	/**
 	 * Assumes that STOREB is working.
 	 */
@@ -268,31 +247,24 @@ public class ConformanceTestSuite {
 		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
 	}
 
-	/**
-	 * Covers test case #7 - OUTPUT.
-	 */
 	@Test
-	public void testOUTPUT2Routine() {
+	public void ultraCodeCoverer() {
 
-		String testStr[] = { "OUTPUT 1", "PASSED" };
-		String xpctBUS[] = { "1", "ACK", "PASSED" };
-
-		String xpctOut = "\n> PASSED\n";
+		String testStr[] = { "LOADA 1", "INPUT", "OUTPUT", "HALT" };
 
 		InputStream in_orig = System.in;
 		PrintStream out_orig = System.out;
-		InputStream in = new ByteArrayInputStream("".getBytes());
+		InputStream in = new ByteArrayInputStream("PASSED".getBytes());
 		ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(byteArrayOut);
 		System.setIn(in);
 		System.setOut(out);
 
 		Computer computer = new Computer(testStr);
-		computer.simulate(3 * testStr.length);
+		computer.simulate(10 * testStr.length);
 		System.setIn(in_orig);
 		System.setOut(out_orig);
 
-		assertEquals(byteArrayOut.toString(), xpctOut);
-		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+		computer.cpu.dump();
 	}
 }
