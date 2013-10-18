@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -12,8 +13,11 @@ import org.junit.Test;
 
 import simulator.Computer;
 
-public class TestStates1to5 {
+public class ConformanceTestSuite {
 
+	/**
+	 * Covers test case #1 - JUMP.
+	 */
 	@Test
 	public void testJUMPRoutine() {
 
@@ -28,7 +32,7 @@ public class TestStates1to5 {
 	}
 
 	/**
-	 * Assumes that LOADA is working.
+	 * Covers test case #2 - LOADA. Assumes that LOADA is working.
 	 */
 	@Test
 	public void testJUMPZRoutine() {
@@ -51,7 +55,7 @@ public class TestStates1to5 {
 	}
 
 	/**
-	 * Assumes that LOADA is working.
+	 * Covers test case #3 - STOREA. Assumes that LOADA is working.
 	 */
 	@Test
 	public void testSTOREARoutine() {
@@ -68,7 +72,7 @@ public class TestStates1to5 {
 	}
 
 	/**
-	 * Assumes that LOADA is working.
+	 * Covers test case #4 - MOVEAB. Assumes that LOADA is working.
 	 */
 	@Test
 	public void testMOVEABRoutine() {
@@ -85,7 +89,7 @@ public class TestStates1to5 {
 	}
 
 	/**
-	 * Assumes that STOREA is working.
+	 * Covers test case #5 - LOADA. Assumes that STOREA is working.
 	 */
 	@Test
 	public void testLOADABRoutine() {
@@ -101,6 +105,9 @@ public class TestStates1to5 {
 		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
 	}
 
+	/**
+	 * Covers test case #6 - INPUT.
+	 */
 	@Test
 	public void testINPUTRoutine() {
 
@@ -124,17 +131,20 @@ public class TestStates1to5 {
 		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
 	}
 
+	/**
+	 * Covers test case #7 - OUTPUT.
+	 */
 	@Test
 	public void testOUTPUTRoutine() {
 
 		String testStr[] = { "OUTPUT 1", "PASSED" };
 		String xpctBUS[] = { "1", "ACK", "PASSED" };
 
-		String xpctOut   = "\n> PASSED\n";
+		String xpctOut = "\n> PASSED\n";
 
 		InputStream in_orig = System.in;
 		PrintStream out_orig = System.out;
-		InputStream in = new ByteArrayInputStream("PASSED".getBytes());
+		InputStream in = new ByteArrayInputStream("".getBytes());
 		ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(byteArrayOut);
 		System.setIn(in);
@@ -147,5 +157,42 @@ public class TestStates1to5 {
 
 		assertEquals(byteArrayOut.toString(), xpctOut);
 		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+	}
+
+	/**
+	 * Covers test case #8 and #9 - FOPEN and FREAD.
+	 */
+	@Test
+	public void testFOPENandFREADRoutine() {
+
+		String testStr[] = { "FOPEN 2", "FREAD 2", "TestFile" };
+		String xpctBUS[] = { "2", "ACK", "PASSED" };
+		String xpctRAM[] = { "FOPEN 2", "FREAD 2", "PASSED" };
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(5 * testStr.length);
+
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
+	}
+
+	/**
+	 * Covers test case #10 - FCLOSE. Assumes FOPEN and FREAD are working. It
+	 * will print an error because BufferedReader has been closed, but the test
+	 * will still pass.
+	 * 
+	 */
+	@Test
+	public void testFCLOSERoutine() {
+
+		String testStr[] = { "FOPEN 3", "FCLOSE", "FREAD 3", "TestFile" };
+		String xpctBUS[] = { "2", "FREAD", "FREAD 3" };
+		String xpctRAM[] = { "FOPEN 3", "FCLOSE", "FREAD 3", "TestFile" };
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(10 * testStr.length);
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
+
 	}
 }

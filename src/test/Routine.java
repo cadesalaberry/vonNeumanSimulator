@@ -73,9 +73,18 @@ public class Routine {
 		boolean passed = true;
 
 		for (int i = 0; i < xpected.length && passed; i++) {
-			passed = r.cell(i).equals(xpected[i]);
+			if (!r.cell(i).equals(xpected[i])) {
+				System.out
+						.println("Error: RAM state is not matching expected value."
+								+ "\nHas Found: "
+								+ r.cell(i)
+								+ " @i="
+								+ i
+								+ "\nExpecting: " + Arrays.toString(xpected));
+				return false;
+			}
 		}
-		return passed;
+		return true;
 	}
 
 	/**
