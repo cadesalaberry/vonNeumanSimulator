@@ -92,7 +92,7 @@ public class ConformanceTestSuite {
 	 * Covers test case #5 - LOADA. Assumes that STOREA is working.
 	 */
 	@Test
-	public void testLOADABRoutine() {
+	public void testLOADARoutine() {
 
 		String testStr[] = { "LOADA 3", "STOREA 2", "FAILED", "PASSED" };
 		String xpctBUS[] = { "2", "ACK", "PASSED" };
@@ -194,5 +194,118 @@ public class ConformanceTestSuite {
 		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
 		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
 
+	}
+/*
+	@Test
+	public void ultraCodeCoverer() {
+
+		String testStr[] = { "HALT"};
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(10 * testStr.length);
+		computer.cpu.dump();
+	}*/
+
+	@Test
+	public void carlos4Lyfe() {
+
+		String testStr[] = { "LOADA 1", "INPUT", "OUTPUT", "HALT"};
+		
+		InputStream in_orig = System.in;
+		PrintStream out_orig = System.out;
+		InputStream in = new ByteArrayInputStream("PASSED".getBytes());
+		ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(byteArrayOut);
+		System.setIn(in);
+		System.setOut(out);
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(10 * testStr.length);
+		System.setIn(in_orig);
+		System.setOut(out_orig);
+		
+		computer.cpu.dump();
+	}
+
+	
+
+	/**
+	 * Assumes that STOREB is working.
+	 */
+	@Test
+	public void testLOADBRoutine() {
+
+		String testStr[] = { "LOADB 3", "STOREB 2", "FAILED", "PASSED" };
+		String xpctBUS[] = { "2", "ACK", "PASSED" };
+		String xpctRAM[] = { "LOADB 3", "STOREB 2", "PASSED", "PASSED" };
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(3 * testStr.length);
+
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
+	}
+
+	/**
+	 * Assumes that LOADB is working.
+	 */
+	@Test
+	public void testSTOREBRoutine() {
+
+		String testStr[] = { "LOADB 3", "STOREB 2", "FAILED", "PASSED" };
+		String xpctBUS[] = { "2", "ACK", "PASSED" };
+		String xpctRAM[] = { "LOADB 3", "STOREB 2", "PASSED", "PASSED" };
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(3 * testStr.length);
+
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
+	}
+
+	/**
+	 * Assumes that ADD is working.
+	 */
+	@Test
+	public void testADDRoutine() {
+
+		String testStr[] = { "LOADA 5", "LOADB 5", "ADD", "STOREA 4", "FAILED",
+				"4" };
+		String xpctBUS[] = { "4", "ACK", "8" };
+		String xpctRAM[] = { "LOADA 5", "LOADB 5", "ADD", "STOREA 4", "8", "4" };
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(4 * testStr.length);
+
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
+		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
+	}
+
+	/**
+	 * Covers test case #7 - OUTPUT.
+	 */
+	@Test
+	public void testOUTPUT2Routine() {
+
+		String testStr[] = { "OUTPUT 1", "PASSED" };
+		String xpctBUS[] = { "1", "ACK", "PASSED" };
+
+		String xpctOut = "\n> PASSED\n";
+
+		InputStream in_orig = System.in;
+		PrintStream out_orig = System.out;
+		InputStream in = new ByteArrayInputStream("".getBytes());
+		ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(byteArrayOut);
+		System.setIn(in);
+		System.setOut(out);
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(3 * testStr.length);
+		System.setIn(in_orig);
+		System.setOut(out_orig);
+
+		assertEquals(byteArrayOut.toString(), xpctOut);
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
 	}
 }
