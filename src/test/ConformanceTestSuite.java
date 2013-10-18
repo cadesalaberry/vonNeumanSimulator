@@ -192,7 +192,18 @@ public class ConformanceTestSuite {
 		computer.simulate(10 * testStr.length);
 		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
 		assertTrue(Routine.ramStateIsMatching(computer.ram, xpctRAM));
+	}
 
+	@Test
+	public void testHALTRoutine() {
+
+		String testStr[] = { "HALT" };
+		String xpctBUS[] = { "0", "ACK", "HALT" };
+
+		Computer computer = new Computer(testStr);
+		computer.simulate(10 * testStr.length);
+
+		assertTrue(Routine.busStateIsMatching(computer.bus, xpctBUS));
 	}
 
 	/**
