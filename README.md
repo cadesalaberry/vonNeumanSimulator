@@ -66,3 +66,7 @@ Each CPU cycle involves fetching the next instruction from memory according to t
 
 [pathtree]: assets/pathtree.png "State Machine Diagram"
 [diagram]: assets/statemachine.png "State Machine Diagram"
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cadesalaberry/vonneumansimulator/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
