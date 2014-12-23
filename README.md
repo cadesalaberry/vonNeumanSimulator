@@ -89,7 +89,12 @@ We used eclEmma to analyse the coverage of our testing code, leading to the foll
 
 Because the entire code was not covered with the previous test cases, we added the complementary ones to make it complete.
 
-**TABLE TO ADD FROM PDF**
+| ID |                               Input                               |                                        Expected Output                                        | Coverage Goal |
+|:--:|:-----------------------------------------------------------------:|:---------------------------------------------------------------------------------------------:|:-------------:|
+| 12 |        RAM =  { “LOADB 3”, “STOREB 2”, “FAILED”, “PASSED”}        |      RAM =   { “LOADB 3”, “STOREB 2”, “PASSED”, “PASSED”} BUS = { “2”, “ACK”, “PASSED” }      |  case: LOADB  |
+| 13 |        RAM =  { “LOADB 3”, “STOREB 2”, “FAILED”, “PASSED”}        |      RAM =   { “LOADB 3”, “STOREB 2”, “PASSED”, “PASSED”} BUS = { “2”, “ACK”, “PASSED” }      |  case: STOREB |
+| 14 | RAM =  { “LOADA 5”, “LOADB 5”, “ADD”, “STOREA 4”, “FAILED”, “4” } |     RAM =  { “LOADA 5”, “LOADB 5”, “ADD”, “STOREA 4”, “8”, “4” } BUS = { “4”, “ACK”, “8” }    |   case: ADD   |
+| 15 |                   RAM = { “OUTPUT 1”, “PASSED” }                  | RAM = { “OUTPUT 1”, “PASSED” } BUS = { “1”, “ACK”, “PASSED” } expected output = “\n PASSED\n” |  case: OUTPUT |
 
 
 # Extended State Based Testing Report
