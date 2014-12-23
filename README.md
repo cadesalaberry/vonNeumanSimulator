@@ -1,7 +1,7 @@
 vonNeumanSimulator
 ==================
 
-Test suit designed around the Computer Simulator from Davide Brugali and Marco Torchiano.
+Test suite designed around the Computer Simulator from Davide Brugali and Marco Torchiano.
 
 
 # Roundtrip Path Tree
