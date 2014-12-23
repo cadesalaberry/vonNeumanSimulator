@@ -16,7 +16,67 @@ Test suit designed around the Computer Simulator from Davide Brugali and Marco T
 - Test sequence covering start state, event/condition, expected action, and expected new
 state of the system.
 
-**TABLE TO ADD FROM PDF**
+|  ID  | Start State |      Event      | Condition |                        Reaction                       | New State |
+|:----:|:-----------:|:---------------:|:---------:|:-----------------------------------------------------:|:---------:|
+|  1.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  1.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  1.3 |      S1     |       JUMP      |     -     |                       PC=arg(IR)                      |    S16    |
+|  1.4 |     S16     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+|  2.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  2.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  2.3 |      S1     |      JUMPZ      |  RegA==0  |                       PC=arg(IR)                      |     S2    |
+|  2.4 |      S1     |      JUMPZ      |  RegA!=0  |                           -                           |     S2    |
+|  2.4 |      S2     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+|  3.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  3.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  3.3 |      S1     |      STOREA     |     -     | bus.command=RAM_WRITEbus.data=RegAbus.address=arg(IR) |     S3    |
+|  3.4 |      S3     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+|  4.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  4.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  4.3 |      S1     |      MOVEAB     |     -     |   bus.command=RAM_WRITEbus.data=RegAbus.address=RegB  |     S4    |
+|  4.4 |      S4     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+|  5.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  5.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  5.3 |      S1     |      LOADA      |     -     |        bus.command=RAM_READbus.address=arg(IR)        |     S5    |
+|  5.4 |      S5     | bus.command=ACK |     -     |                     RegA=bus.data                     |     S6    |
+|  5.5 |      S6     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+|  6.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  6.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  6.3 |      S1     |      INPUT      |     -     |                   bus.command=INPUT                   |     S7    |
+|  6.4 |      S7     | bus.command=ACK |     -     |        bus.command=RAM_WRITEbus.address=arg(IR)       |     S8    |
+|  6.5 |      S8     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+|  7.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  7.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  7.3 |      S1     |      OUTPUT     |     -     |        bus.command=RAM_READbus.address=arg(IR)        |     S9    |
+|  7.4 |      S9     | bus.command=ACK |     -     |                   bus.command=OUTPUT                  |    S10    |
+|  7.5 |     S10     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+|  8.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  8.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  8.3 |      S1     |      FREAD      |     -     |                  bus.command=HD_READ                  |    S11    |
+|  8.4 |     S11     | bus.command=ACK |     -     |        bus.command=RAM_WRITEbus.address=arg(IR)       |    S12    |
+|  8.5 |     S12     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+|  9.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|  9.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+|  9.3 |      S1     |      FOPEN      |     -     |        bus.command=RAM_READbus.address=arg(IR)        |    S13    |
+|  9.4 |     S13     | bus.command=ACK |     -     |                  bus.command=HD_OPEN                  |    S14    |
+|  9.5 |     S14     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+| 10.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+| 10.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+| 10.3 |      S1     |      FCLOSE     |     -     |                  bus.command=HD_CLOSE                 |    S15    |
+| 10.4 |     S15     | bus.command=ACK |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+|      |             |                 |           |                                                       |           |
+| 11.1 |      -      |   constructor   |     -     |           bus.address=PCbus.command=RAM_READ          |     S0    |
+| 11.2 |      S0     | bus.command=ACK |     -     |                    IR=bus.dataPC++                    |     S1    |
+| 11.3 |      S1     |       HALT      |     -     |                           -                           |    END    |
 
 # State Based Testing Report
 
